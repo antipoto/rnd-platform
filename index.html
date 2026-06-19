@@ -1509,7 +1509,7 @@ function doSearch(){
 </script>
 <script>
 var maskMode=true;function maskText(str){if(!maskMode||!str)return str;var n=5;if(str.length<=n)return str;return str.substring(0,n)+'*'.repeat(Math.min(str.length-n,15));}
-var DIFY_URL='https://antipoto.ddns.net/v1',DIFY_KEY='app-82fN1YTXXw8pXYv5bFEJ6coL',convId=null,chatOpen=false;
+var DIFY_URL='https://antipoto.ddns.net/v1',DIFY_KEY='app-82fN1YTXXw8pXYv5bFEJ6coL',convId=null,chatOpen=false,userId='web-user-'+Math.random().toString(36).slice(2);
 function toggleChat(){chatOpen=!chatOpen;document.getElementById('ai-panel').style.display=chatOpen?'flex':'none';document.getElementById('ai-fab').textContent=chatOpen?'✕':'🤖';if(chatOpen)document.getElementById('ai-inp').focus();}
 function askQuick(el){document.getElementById('ai-inp').value=el.textContent;sendMsg();}
 function escHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
@@ -1521,7 +1521,7 @@ async function sendMsg(){
   inp.value='';document.getElementById('ai-quick').style.display='none';
   addMsg(q,true);showTyping();document.getElementById('ai-send-btn').disabled=true;
   try{
-    var r=await fetch(DIFY_URL+'/chat-messages',{method:'POST',headers:{'Authorization':'Bearer '+DIFY_KEY,'Content-Type':'application/json'},body:JSON.stringify({inputs:{},query:q,response_mode:'streaming',conversation_id:convId||'',user:'user-'+Date.now()})});
+    var r=await fetch(DIFY_URL+'/chat-messages',{method:'POST',headers:{'Authorization':'Bearer '+DIFY_KEY,'Content-Type':'application/json'},body:JSON.stringify({inputs:{},query:q,response_mode:'streaming',conversation_id:convId||'',user:userId})});
     if(!r.ok){hideTyping();addMsg('⚠️ 오류: 서버 응답 오류 ('+r.status+')',false);document.getElementById('ai-send-btn').disabled=false;return;}
     var reader=r.body.getReader();var decoder=new TextDecoder();
     var msgDiv=null;var fullText='';
