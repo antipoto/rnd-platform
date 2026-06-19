@@ -790,7 +790,7 @@ async function doSaveAll(){
         var difyFd=new FormData();
         difyFd.append('file', new File([buf], fname, {type: q.file.type||'application/octet-stream'}));
         difyFd.append('data', JSON.stringify({indexing_technique:'high_quality',process_rule:{mode:'automatic'}}));
-        var dr=await fetch('http://antipoto.ddns.net/v1/datasets/a821e27d-80e6-41b0-a27f-95f41d392c3e/document/create-by-file',{
+        var dr=await fetch('https://antipoto.ddns.net/v1/datasets/a821e27d-80e6-41b0-a27f-95f41d392c3e/document/create-by-file',{
           method:'POST',
           headers:{'Authorization':'Bearer dataset-vhVPW2URCA6Nqp3ZMcSjqMRX'},
           body:difyFd
@@ -1302,7 +1302,7 @@ window.toggleSearchMode=function(){
 
 window.semanticSearch=async function(query){
   try{
-    var resp=await fetch('http://antipoto.ddns.net/v1/datasets/'+DIFY_DS_ID+'/retrieve',{
+    var resp=await fetch('https://antipoto.ddns.net/v1/datasets/'+DIFY_DS_ID+'/retrieve',{
       method:'POST',
       headers:{'Authorization':'Bearer '+DIFY_DS_KEY,'Content-Type':'application/json'},
       body:JSON.stringify({query:query,retrieval_model:{search_method:'semantic_search',reranking_enable:false,top_k:30,score_threshold_enabled:true,score_threshold:0.3}})
@@ -1509,7 +1509,7 @@ function doSearch(){
 </script>
 <script>
 var maskMode=true;function maskText(str){if(!maskMode||!str)return str;var n=5;if(str.length<=n)return str;return str.substring(0,n)+'*'.repeat(Math.min(str.length-n,15));}
-var DIFY_URL='http://antipoto.ddns.net/v1',DIFY_KEY='app-82fN1YTXXw8pXYv5bFEJ6coL',convId=null,chatOpen=false;
+var DIFY_URL='https://antipoto.ddns.net/v1',DIFY_KEY='app-82fN1YTXXw8pXYv5bFEJ6coL',convId=null,chatOpen=false;
 function toggleChat(){chatOpen=!chatOpen;document.getElementById('ai-panel').style.display=chatOpen?'flex':'none';document.getElementById('ai-fab').textContent=chatOpen?'✕':'🤖';if(chatOpen)document.getElementById('ai-inp').focus();}
 function askQuick(el){document.getElementById('ai-inp').value=el.textContent;sendMsg();}
 function escHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
